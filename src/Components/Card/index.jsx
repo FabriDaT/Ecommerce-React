@@ -4,7 +4,8 @@ import { ShoppingCartContext } from "../../Context";
 
 const Card = (data) => {
 
-  const context =  useContext(ShoppingCartContext)
+ // const context =  useContext(ShoppingCartContext)
+  const { count, setCount } = useContext(ShoppingCartContext)
 
   return (
     
@@ -16,9 +17,13 @@ const Card = (data) => {
         <img className="w-full h-full object-cover rounded-lg" src={data.data?.images[0]} alt={data.data.title} />
         <button
          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 hover:bg-blue-500 rounded-full font-bold"
-         onClick={()=>{context.setCount(context.count +1)}}
+         // onClick={()=>{context.setCount(context.count +1)}}
+         onClick={() => setCount(count + 1)}
          >
-          +
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" strokeWidth={3.5} stroke="currentColor" className="w-full h-full">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
         </button> 
       </figure>
       <p className="flex justify-between">
