@@ -3,12 +3,23 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 const Card = (data) => {
-  // const context =  useContext(ShoppingCartContext)
-  const { count, setCount, openProductDetail, setProductToShow } = useContext(ShoppingCartContext);
+  const context =  useContext(ShoppingCartContext)
+  //const { count, setCount, openProductDetail, setProductToShow, cartProducts,setCartProducts} = useContext(ShoppingCartContext);
 
   const showProduct = (productDetail) => {
-    openProductDetail()
-    setProductToShow(productDetail)
+    context.openProductDetail()
+    context.setProductToShow(productDetail)
+    context.closeCheckoutSideMenu()
+  }
+
+  const addProductToCart =  (event, productData) => { 
+    event.stopPropagation() // evita que el evento se propague hacia los elementos padres
+    context.setCount(context.count + 1);
+    context.setCartProducts([...context.cartProducts, productData])
+    context.closeProductDetail()
+    context.openCheckoutSideMenu()
+    
+    console.log('Cart:  ', context.cartProducts)
   }
 
   return (
@@ -23,15 +34,14 @@ const Card = (data) => {
         <img
           className="w-full h-full object-cover rounded-lg"
           src={data.data?.images[0]}
-          alt={data.data.title}
+          alt={data.data?.title}
         />
         <button
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 hover:bg-green-500 rounded-full font-bold"
-          // onClick={()=>{context.setCount(context.count +1)}}
-          onClick={(e) => {
-            e.stopPropagation();
-            setCount(count + 1);
-          }}
+       
+          onClick={(event) => 
+            addProductToCart(event,data.data)
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
