@@ -9,13 +9,13 @@ const CheckoutSideMenu = () => {
     <aside
       className={`${
         context.isCheckoutSideMenuOpen ? "flex" : "hidden"
-      } checkout-side-menu flex flex-col fixed top-20 right-0 border border-black rounded-lg bg-white overflow-auto `}
+      } checkout-side-menu flex flex-col fixed right-0 border border-black rounded-lg bg-white overflow-auto `}
     >
       <div className="flex items-center justify-between p-6">
         <h2 className="font-medium text-xl"> My Order </h2>
         <button
           className=" rounded-full hover:bg-red-400"
-          onClick={context.closeCheckoutSideMenu()}
+          onClick={context.closeCheckoutSideMenu}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
