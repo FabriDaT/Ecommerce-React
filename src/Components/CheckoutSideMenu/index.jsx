@@ -1,10 +1,13 @@
 import React from "react";
-import './styles.css'
+import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
+import { OrderCard } from "../OrderCard";
 
 const CheckoutSideMenu = () => {
-  const context = useContext(ShoppingCartContext);
+  const context = useContext(ShoppingCartContext)
+  console.log('CART:  ', context.cartProducts)
+
   return (
     <aside
       className={`${
@@ -33,6 +36,14 @@ const CheckoutSideMenu = () => {
           </svg>
         </button>
       </div>
+      {context.cartProducts.map(product => (
+        <OrderCard
+            key={product.key}
+            title={product.title}
+            imageUrl={product.imageUrl}
+            price={product.price}
+        />
+      ))}
     </aside>
   );
 };

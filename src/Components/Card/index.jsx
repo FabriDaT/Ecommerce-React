@@ -19,7 +19,7 @@ const Card = (data) => {
     context.closeProductDetail()
     context.openCheckoutSideMenu()
     
-    console.log('Cart:  ', context.cartProducts)
+    
   }
 
   return (
