@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import { OrderCard } from "../OrderCard";
+import  OrderCard  from "../OrderCard";
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
@@ -36,14 +36,21 @@ const CheckoutSideMenu = () => {
           </svg>
         </button>
       </div>
-      {context.cartProducts.map(product => (
+
+      <div className="px-6 overflow-auto">
+           {
+           context.cartProducts.map(product => (
         <OrderCard
-            key={product.key}
+            key={product.title} // use como 'key' el titulo ya que en la api se repiten los ID, 
+            // cosa que da un error en consola al mapear los productos y repetirse la key
             title={product.title}
-            imageUrl={product.imageUrl}
+            imageUrl={product.images}
             price={product.price}
         />
-      ))}
+      ))
+      }
+      </div>
+   
     </aside>
   );
 };
