@@ -6,7 +6,11 @@ import  OrderCard  from "../OrderCard";
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
-  console.log('CART:  ', context.cartProducts)
+
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter(product => product.id != id)
+    context.setCartProducts(filteredProducts)
+  }
 
   return (
     <aside
@@ -41,11 +45,13 @@ const CheckoutSideMenu = () => {
            {
            context.cartProducts.map(product => (
         <OrderCard
+            id={product.id}
             key={product.title} // use como 'key' el titulo ya que en la api se repiten los ID, 
             // cosa que da un error en consola al mapear los productos y repetirse la key
             title={product.title}
             imageUrl={product.images}
             price={product.price}
+            handleDelete={handleDelete}
         />
       ))
       }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const OrderCard = ({ id, title, imageUrl, price, onRemove }) => {
+const OrderCard = ({ id, title, imageUrl, price, onRemove, handleDelete }) => {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);
 
@@ -44,7 +44,7 @@ const OrderCard = ({ id, title, imageUrl, price, onRemove }) => {
         </div>
         <button
           className="p-2 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
-          onClick={() => onRemove(id)} // Llama a la función de eliminación
+          onClick={() => handleDelete(id)} // Llama a la función de eliminación
           aria-label={`Eliminar ${title}`}
         >
           <svg

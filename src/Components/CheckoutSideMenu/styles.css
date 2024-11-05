@@ -1,5 +1,5 @@
 .checkout-side-menu{
-    width: 360px;
+    width: 380px;
     height: calc( 100vh - 68px); /* 68px es lo que mide el navbar*/
     top: 68px;
 
