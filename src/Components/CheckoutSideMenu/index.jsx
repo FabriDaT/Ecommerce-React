@@ -3,14 +3,18 @@ import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import  OrderCard  from "../OrderCard";
+import { totalPrice } from "../../utils";
 
 const CheckoutSideMenu = () => {
+
   const context = useContext(ShoppingCartContext)
 
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(product => product.id != id)
     context.setCartProducts(filteredProducts)
   }
+
+
 
   return (
     <aside
@@ -52,9 +56,22 @@ const CheckoutSideMenu = () => {
             imageUrl={product.images}
             price={product.price}
             handleDelete={handleDelete}
+           
+
         />
       ))
       }
+      </div>
+
+      <div className="px-6">
+        <p>
+          <span>Total: </span>
+          <span>${
+            
+            
+
+            }</span> {/* Usar la función totalPrice */}
+        </p>
       </div>
    
     </aside>

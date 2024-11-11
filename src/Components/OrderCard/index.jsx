@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const OrderCard = ({ id, title, imageUrl, price, onRemove, handleDelete }) => {
+const OrderCard = ({ id, title, imageUrl, price, handleDelete  }) => {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);
 
-  const handleOnChange = (event) => {
+    const handleOnChange = (event) => {
     const newQuantity = Math.max(1, event.target.value); // Evitar cantidades negativas
     setQuantity(newQuantity);
     setTotal(price * newQuantity);
