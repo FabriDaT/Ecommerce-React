@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CheckoutSideMenu from "../CheckoutSideMenu";
 
 const OrderCard = ({ id, title, imageUrl, price, handleDelete  }) => {
   const [quantity, setQuantity] = useState(1);

@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <Layout>
-      HOME HOME HOME HOME HOME HOME
+      HOME 
       <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
         {items?.map((item) => (
           <Card key={item.id} data={item} />

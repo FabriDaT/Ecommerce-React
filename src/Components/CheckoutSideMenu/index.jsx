@@ -14,8 +14,6 @@ const CheckoutSideMenu = () => {
     context.setCartProducts(filteredProducts)
   }
 
-
-
   return (
     <aside
       className={`${
@@ -68,7 +66,7 @@ const CheckoutSideMenu = () => {
           <span>Total: </span>
           <span>${
             
-            
+            totalPrice(context.cartProducts)
 
             }</span> {/* Usar la función totalPrice */}
         </p>
