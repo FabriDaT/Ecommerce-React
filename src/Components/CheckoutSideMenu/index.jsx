@@ -2,17 +2,20 @@ import React from "react";
 import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
-import  OrderCard  from "../OrderCard";
+import OrderCard from "../OrderCard";
 import { totalPrice } from "../../utils";
 
 const CheckoutSideMenu = () => {
-
-  const context = useContext(ShoppingCartContext)
+  const context = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
-    const filteredProducts = context.cartProducts.filter(product => product.id != id)
-    context.setCartProducts(filteredProducts)
-  }
+    const filteredProducts = context.cartProducts.filter(
+      (product) => product.id != id
+    );
+    context.setCartProducts(filteredProducts);
+  };
+
+
 
   return (
     <aside
@@ -44,34 +47,27 @@ const CheckoutSideMenu = () => {
       </div>
 
       <div className="px-6 overflow-auto">
-           {
-           context.cartProducts.map(product => (
-        <OrderCard
+        {context.cartProducts.map((product) => (
+          <OrderCard
             id={product.id}
-            key={product.title} // use como 'key' el titulo ya que en la api se repiten los ID, 
+            key={product.id} // use como 'key' el titulo ya que en la api se repiten los ID,
             // cosa que da un error en consola al mapear los productos y repetirse la key
             title={product.title}
             imageUrl={product.images}
             price={product.price}
             handleDelete={handleDelete}
-           
-
-        />
-      ))
-      }
+                       
+          />
+        ))}
       </div>
 
       <div className="px-6">
         <p>
           <span>Total: </span>
-          <span>${
-            
-            totalPrice(context.cartProducts)
-
-            }</span> {/* Usar la función totalPrice */}
+          <span>${totalPrice(context.cartProducts)}</span>
+          {/* Usar la función totalPrice */}
         </p>
       </div>
-   
     </aside>
   );
 };
