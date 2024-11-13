@@ -15,6 +15,7 @@ const Card = (data) => {
   const addProductToCart = (event, productData) => {
     event.stopPropagation(); // evita que el evento se propague hacia los elementos padres
     context.setCount(context.count + 1);
+    productData.quantity = 0
     context.setCartProducts([...context.cartProducts, productData]);
     context.closeProductDetail();
     context.openCheckoutSideMenu();

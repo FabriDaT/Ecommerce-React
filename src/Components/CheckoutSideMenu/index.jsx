@@ -16,6 +16,23 @@ const CheckoutSideMenu = () => {
   };
 
 
+  const increaseQuantity = (id, quantity) => {
+    const productCart = context.cartProducts.find(cartItem => cartItem.id === id);
+    productCart.quantity += 1;
+    context.setCartProducts([...context.cartProducts]); // Causar un renderizado actualizando el estado
+  }
+  const decreaseQuantity = (id, quantity) => {
+    const deletedProduct = context.cartProducts.filter(product => product.id != id);
+    const productCart = context.cartProducts.find(cartItem => cartItem.id === id);
+    productCart.quantity -= 1;
+    context.setCartProducts([...context.cartProducts]); 
+    if (productCart.quantity === 0){
+      context.setCartProducts(deletedProduct);
+    } 
+  }
+
+
+
 
   return (
     <aside
@@ -56,6 +73,9 @@ const CheckoutSideMenu = () => {
             imageUrl={product.images}
             price={product.price}
             handleDelete={handleDelete}
+            quantity={product.quantity}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
                        
           />
         ))}
