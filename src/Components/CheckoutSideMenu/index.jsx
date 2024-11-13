@@ -13,6 +13,7 @@ const CheckoutSideMenu = () => {
       (product) => product.id != id
     );
     context.setCartProducts(filteredProducts);
+    context.setCount(context.count - 1)
   };
 
 
@@ -30,8 +31,6 @@ const CheckoutSideMenu = () => {
       context.setCartProducts(deletedProduct);
     } 
   }
-
-
 
 
   return (
@@ -82,10 +81,9 @@ const CheckoutSideMenu = () => {
       </div>
 
       <div className="px-6">
-        <p>
-          <span>Total: </span>
-          <span>${totalPrice(context.cartProducts)}</span>
-          {/* Usar la función totalPrice */}
+        <p className="flex justify-between items-center">
+          <span className="font-light">Total: </span>
+          <span className="font-medium text-xl">${totalPrice(context.cartProducts)}</span>
         </p>
       </div>
     </aside>

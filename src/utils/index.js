@@ -10,7 +10,6 @@ export const totalPrice = (products) => {
     // tomar todos los productos del carrito y suma los precios
     let sum = 0
     products.forEach(product => {
-      console.log('entro a la suma')
         sum += product.price * product.quantity
     });
     return sum
