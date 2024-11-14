@@ -17,20 +17,28 @@ const CheckoutSideMenu = () => {
   };
 
 
-  const increaseQuantity = (id, quantity) => {
+  const increaseQuantity = (id) => {
     const productCart = context.cartProducts.find(cartItem => cartItem.id === id);
     productCart.quantity += 1;
     context.setCartProducts([...context.cartProducts]); // Causar un renderizado actualizando el estado
   }
-  const decreaseQuantity = (id, quantity) => {
-    const deletedProduct = context.cartProducts.filter(product => product.id != id);
-    const productCart = context.cartProducts.find(cartItem => cartItem.id === id);
-    productCart.quantity -= 1;
-    context.setCartProducts([...context.cartProducts]); 
-    if (productCart.quantity === 0){
-      context.setCartProducts(deletedProduct);
-    } 
+
+
+  const decreaseQuantity = (id) => {
+      // Encontramos el producto en el carrito
+  const updatedProducts = context.cartProducts.map((product) => {
+    if (product.id === id && product.quantity > 1) {
+      // Si la cantidad es mayor a 1, disminuimos la cantidad
+      return { ...product, quantity: product.quantity - 1 };
+    }
+    // Si la cantidad ya es 1 o menos, no hacemos nada
+    return product;
+  });
+
+  // Actualizamos el estado del carrito
+  context.setCartProducts(updatedProducts);
   }
+
 
 
   return (

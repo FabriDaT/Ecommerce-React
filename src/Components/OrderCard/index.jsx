@@ -29,8 +29,13 @@ const OrderCard = (props) => {
       <div className="flex items-center gap-2 justify-between w-[40%]">
         <div className="flex items-center border-gray-100">
           <span
-            className="cursor-pointer rounded-l bg-gray-200 py-1 px-[3px] duration-100 hover:bg-red-500 hover:text-blue-50"
+             className={`cursor-pointer rounded-l py-1 px-[3px] duration-100 ${
+              quantity === 1
+                ? "bg-red-200 text-white hover:bg-black cursor-not-allowed  flex items-center justify-center" // Estilo para cuando la cantidad sea 1
+                : "bg-gray-200 hover:bg-red-500 hover:text-blue-50" // Estilo normal para cuando la cantidad sea mayor a 1
+            }`}
             onClick={() => decreaseQuantity(id)}
+            disabled={quantity === 1}
           >
             -
           </span>

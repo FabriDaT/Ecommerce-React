@@ -24,6 +24,9 @@ export const ShoppingCartProvider = ({ children }) => {
   // Shooping cart - Add products to cart
   const [cartProducts, setCartProducts] = useState([]) 
 
+  // Shooping cart - Order
+  const [order, setOrder] = useState([]) 
+
    
 
   return (
