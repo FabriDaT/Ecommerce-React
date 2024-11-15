@@ -23,7 +23,6 @@ const CheckoutSideMenu = () => {
     context.setCartProducts([...context.cartProducts]); // Causar un renderizado actualizando el estado
   }
 
-
   const decreaseQuantity = (id) => {
       // Encontramos el producto en el carrito
   const updatedProducts = context.cartProducts.map((product) => {
@@ -34,11 +33,20 @@ const CheckoutSideMenu = () => {
     // Si la cantidad ya es 1 o menos, no hacemos nada
     return product;
   });
-
   // Actualizamos el estado del carrito
   context.setCartProducts(updatedProducts);
   }
 
+  const handleCheckout = () =>{
+    const orderToAdd = {
+      date : '01.02.2024',
+      products: context.cartProducts,
+      totalProducts : context.cartProducts.length,
+      totalPrice: totalPrice(context.cartProducts),
+    }
+    context.setOrder([...context.order, orderToAdd])
+    context.setCartProducts([])
+  }
 
 
   return (
@@ -93,6 +101,7 @@ const CheckoutSideMenu = () => {
           <span className="font-light">Total: </span>
           <span className="font-medium text-xl">${totalPrice(context.cartProducts)}</span>
         </p>
+        <button  onClick={handleCheckout()}>Checkout</button>
       </div>
     </aside>
   );

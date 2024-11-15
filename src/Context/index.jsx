@@ -33,7 +33,8 @@ export const ShoppingCartProvider = ({ children }) => {
     <ShoppingCartContext.Provider  
       value={{
         count, setCount, openProductDetail, closeProductDetail, isProductDetailOpen, productToShow, setProductToShow,
-        cartProducts, setCartProducts,isCheckoutSideMenuOpen, openCheckoutSideMenu, closeCheckoutSideMenu
+        cartProducts, setCartProducts,isCheckoutSideMenuOpen, openCheckoutSideMenu, closeCheckoutSideMenu,
+        order, setOrder
       }}
     >
       {children}
