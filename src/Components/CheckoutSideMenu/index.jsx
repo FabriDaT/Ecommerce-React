@@ -78,7 +78,7 @@ const CheckoutSideMenu = () => {
         </button>
       </div>
 
-      <div className="px-6 overflow-auto">
+      <div className="px-6 overflow-auto flex-1">
         {context.cartProducts.map((product) => (
           <OrderCard
             id={product.id}
@@ -96,12 +96,12 @@ const CheckoutSideMenu = () => {
         ))}
       </div>
 
-      <div className="px-6">
-        <p className="flex justify-between items-center">
+      <div className="px-6 mb-6">
+        <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total: </span>
           <span className="font-medium text-xl">${totalPrice(context.cartProducts)}</span>
         </p>
-        <button  onClick={handleCheckout()}>Checkout</button>
+        <button className="w-full bg-black py-3 text-white rounded-lg" onClick={handleCheckout}>Checkout</button>
       </div>
     </aside>
   );

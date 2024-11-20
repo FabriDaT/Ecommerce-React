@@ -102,7 +102,7 @@ const Navbar = () => {
             />
           </svg>
 
-          {context.count}
+          {context.cartProducts.length}
         </li>
       </ul>
     </nav>
