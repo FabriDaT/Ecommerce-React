@@ -5,7 +5,7 @@ import ProductDetail from "../../Components/ProductDetail";
 
 function Home() {
 
-  const apiUrl = "https://api.escuelajs.co/api/v1/products";
+  const apiUrl = "https://api.escuelajs.co/api/v1/products"
   const [items, setItems] = useState(null);
 
   useEffect(() => {
@@ -16,6 +16,9 @@ function Home() {
         console.error(`Ups! Ocurrio el siguiente error: ${error}`)
       );
   }, []);
+
+  
+
 
   return (
     <Layout>
@@ -31,3 +34,5 @@ function Home() {
 }
 
 export default Home;
+
+
