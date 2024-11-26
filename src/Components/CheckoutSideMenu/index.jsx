@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
@@ -13,41 +14,41 @@ const CheckoutSideMenu = () => {
       (product) => product.id != id
     );
     context.setCartProducts(filteredProducts);
-    context.setCount(context.count - 1)
+    context.setCount(context.count - 1);
   };
 
-
   const increaseQuantity = (id) => {
-    const productCart = context.cartProducts.find(cartItem => cartItem.id === id);
+    const productCart = context.cartProducts.find(
+      (cartItem) => cartItem.id === id
+    );
     productCart.quantity += 1;
     context.setCartProducts([...context.cartProducts]); // Causar un renderizado actualizando el estado
-  }
+  };
 
   const decreaseQuantity = (id) => {
-      // Encontramos el producto en el carrito
-  const updatedProducts = context.cartProducts.map((product) => {
-    if (product.id === id && product.quantity > 1) {
-      // Si la cantidad es mayor a 1, disminuimos la cantidad
-      return { ...product, quantity: product.quantity - 1 };
-    }
-    // Si la cantidad ya es 1 o menos, no hacemos nada
-    return product;
-  });
-  // Actualizamos el estado del carrito
-  context.setCartProducts(updatedProducts);
-  }
+    // Encontramos el producto en el carrito
+    const updatedProducts = context.cartProducts.map((product) => {
+      if (product.id === id && product.quantity > 1) {
+        // Si la cantidad es mayor a 1, disminuimos la cantidad
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      // Si la cantidad ya es 1 o menos, no hacemos nada
+      return product;
+    });
+    // Actualizamos el estado del carrito
+    context.setCartProducts(updatedProducts);
+  };
 
-  const handleCheckout = () =>{
+  const handleCheckout = () => {
     const orderToAdd = {
-      date : '01.02.2024',
+      date: "01.02.2024",
       products: context.cartProducts,
-      totalProducts : context.cartProducts.length,
+      totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts),
-    }
-    context.setOrder([...context.order, orderToAdd])
-    context.setCartProducts([])
-  }
-
+    };
+    context.setOrder([...context.order, orderToAdd]);
+    context.setCartProducts([]);
+  };
 
   return (
     <aside
@@ -91,7 +92,6 @@ const CheckoutSideMenu = () => {
             quantity={product.quantity}
             increaseQuantity={increaseQuantity}
             decreaseQuantity={decreaseQuantity}
-                       
           />
         ))}
       </div>
@@ -99,9 +99,18 @@ const CheckoutSideMenu = () => {
       <div className="px-6 mb-6">
         <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total: </span>
-          <span className="font-medium text-xl">${totalPrice(context.cartProducts)}</span>
+          <span className="font-medium text-xl">
+            ${totalPrice(context.cartProducts)}
+          </span>
         </p>
-        <button className="w-full bg-black py-3 text-white rounded-lg" onClick={handleCheckout}>Checkout</button>
+        <Link to="/my-orders/last">
+          <button
+            className="w-full bg-black py-3 text-white rounded-lg"
+            onClick={handleCheckout}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );
