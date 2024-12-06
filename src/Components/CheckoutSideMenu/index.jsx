@@ -48,6 +48,7 @@ const CheckoutSideMenu = () => {
     };
     context.setOrder([...context.order, orderToAdd]);
     context.setCartProducts([]);
+    context.closeCheckoutSideMenu()
   };
 
   return (
@@ -83,8 +84,7 @@ const CheckoutSideMenu = () => {
         {context.cartProducts.map((product) => (
           <OrderCard
             id={product.id}
-            key={product.id} // use como 'key' el titulo ya que en la api se repiten los ID,
-            // cosa que da un error en consola al mapear los productos y repetirse la key
+            key={product.id} 
             title={product.title}
             imageUrl={product.images}
             price={product.price}

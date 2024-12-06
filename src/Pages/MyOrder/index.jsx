@@ -3,6 +3,7 @@ import Layout from '../../Components/Layout'
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from '../../Components/OrderCard';
+import { totalPrice } from "../../utils";
 
 function MyOrder() {
 
@@ -10,23 +11,25 @@ function MyOrder() {
 
   return (
     
-    <Layout>MyOrder
-
-   <div className="flex flex-col">
-        {context.order?.slice(-1)[0].s.map((product) => (
+    <Layout>   MyOrder
+ 
+  {   context.order && context.order.length > 0 ? 
+     <div className="flex flex-col w-[80%]">
+        {context.order?.slice(-1)[0]?.products.map((product) => (
           <OrderCard
+            key={product.id} 
             id={product.id}
-            key={product.id} // use como 'key' el titulo ya que en la api se repiten los ID,
-            // cosa que da un error en consola al mapear los productos y repetirse la key
             title={product.title}
             imageUrl={product.images}
             price={product.price}
             quantity={product.quantity}
-           
+            
           />
         ))}
-      </div>
-
+        
+      </div> 
+      : <p>No hay productos en la orden.</p>}
+        <h4>${totalPrice(context.cartProducts)}</h4>
     </Layout>
   )
 }
