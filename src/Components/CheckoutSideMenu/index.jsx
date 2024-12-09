@@ -47,7 +47,7 @@ const CheckoutSideMenu = () => {
       totalPrice: totalPrice(context.cartProducts),
     };
     context.setOrder([...context.order, orderToAdd]);
-    context.setCartProducts([]);
+    //context.setCartProducts([]);
     context.closeCheckoutSideMenu()
   };
 
