@@ -4,7 +4,8 @@ import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
-import { totalPrice } from "../../utils";
+import { totalPrice, DateTime } from "../../utils";
+
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
@@ -40,8 +41,9 @@ const CheckoutSideMenu = () => {
   };
 
   const handleCheckout = () => {
+
     const orderToAdd = {
-      date: "01.02.2024",
+      date: DateTime,
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts),
