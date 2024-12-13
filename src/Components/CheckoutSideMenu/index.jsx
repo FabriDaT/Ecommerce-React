@@ -4,7 +4,7 @@ import "./styles.css";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import OrderCard from "../OrderCard";
-import { totalPrice, DateTime } from "../../utils";
+import { totalPrice, dateTime } from "../../utils";
 
 
 const CheckoutSideMenu = () => {
@@ -43,13 +43,13 @@ const CheckoutSideMenu = () => {
   const handleCheckout = () => {
 
     const orderToAdd = {
-      date: DateTime,
+      date: dateTime(),
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts),
     };
     context.setOrder([...context.order, orderToAdd]);
-    //context.setCartProducts([]);
+    context.setCartProducts([]);
     context.closeCheckoutSideMenu()
   };
 
