@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ShoppingCartContext = createContext();
 
@@ -27,14 +27,29 @@ export const ShoppingCartProvider = ({ children }) => {
   // Shooping cart - Order
   const [order, setOrder] = useState([]) 
 
-   
+   // Get Products
+   const [items, setItems] = useState(null);
+   // Get Products by Title
+   const [searchByTitle, setSearchByTitle] = useState(null);
+   console.log(searchByTitle)
+
+
+   const apiUrl = "https://api.escuelajs.co/api/v1/products"
+   useEffect(() => {
+    fetch(apiUrl)
+      .then((responde) => responde.json())
+      .then((data) => setItems(data))
+      .catch((error) =>
+        console.error(`Ups! Ocurrio el siguiente error: ${error}`)
+      );
+  }, []);
 
   return (
     <ShoppingCartContext.Provider  
       value={{
         count, setCount, openProductDetail, closeProductDetail, isProductDetailOpen, productToShow, setProductToShow,
         cartProducts, setCartProducts,isCheckoutSideMenuOpen, openCheckoutSideMenu, closeCheckoutSideMenu,
-        order, setOrder
+        order, setOrder, items, setItems , searchByTitle ,setSearchByTitle
       }}
     >
       {children}
