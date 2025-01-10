@@ -8,15 +8,17 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if( context.setSearchByTitle?.lenght > 0 ) return (
-      <p>hahahahahahaaa</p>
-    )
-   else {
-    context.items?.map(item => (
-      <Card key={item.id} data={item} />
-    ))
-  } 
-}
+    if (context.setSearchByTitle?.lenght > 0) {
+      
+      if (context.filteredItems?.length > 0) {
+        return context.filteredItems?.map((item) => (
+          <Card key={item.id} data={item} />
+        ))
+      }
+    } else {
+      return context.items?.map((item) => <Card key={item.id} data={item} />)
+    }
+  }
 
   return (
     <Layout>
@@ -24,10 +26,20 @@ function Home() {
         <h1 className="font-medium text-2xl">Exclusive Products</h1>
       </div>
       <div className="flex items-center justify-center relative mb-4 w-160">
-      <svg className="size-6 m-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
-  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-</svg>
-
+        <svg
+          className="size-6 m-1"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
 
         <input
           type="text"
