@@ -7,18 +7,35 @@ import { ShoppingCartContext } from "../../Context";
 function Home() {
   const context = useContext(ShoppingCartContext);
 
+  // const renderView = () => {
+  //   if (context.searchByTitle?.length > 0) {
+  //     if (context.filteredItems?.length > 0) {
+  //       return context.filteredItems?.map((item) => (
+  //         <Card key={item.id} data={item} />
+  //       ));
+  //     }
+  //   }
+  //      else {
+  //       return (  <div> dont find any products...</div>)
+  //      }
+  // else {
+  //     return context.items?.map((item) => <Card key={item.id} data={item} />);
+  //   }
+  // };
+
   const renderView = () => {
-    if (context.setSearchByTitle?.lenght > 0) {
-      
-      if (context.filteredItems?.length > 0) {
-        return context.filteredItems?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))
-      }
+    const itemsToRender = context.searchByTitle?.length > 0
+      ? context.filteredItems
+      : context.items;
+
+    if (itemsToRender?.length > 0) {
+      return itemsToRender.map(item => (
+        <Card key={item.id} data={item} />
+      ));
     } else {
-      return context.items?.map((item) => <Card key={item.id} data={item} />)
+      return <p>No Results Found</p>;
     }
-  }
+  };
 
   return (
     <Layout>
@@ -44,6 +61,7 @@ function Home() {
         <input
           type="text"
           placeholder="Search a product.."
+          id="search bar"
           className="rounded-lg border border-black w-80 p-4 mb-4"
           onChange={(event) => context.setSearchByTitle(event.target.value)}
         />
