@@ -7,18 +7,34 @@ import { ShoppingCartContext } from "../../Context";
 function Home() {
   const context = useContext(ShoppingCartContext);
 
-  const renderView = () => {
-    if (context.setSearchByTitle?.lenght > 0) {
+  // const renderView = () => {
+  //   if (context.setSearchByTitle?.length > 0) {
       
-      if (context.filteredItems?.length > 0) {
-        return context.filteredItems?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))
-      }
-    } else {
-      return context.items?.map((item) => <Card key={item.id} data={item} />)
+  //     if (context.filteredItems?.length > 0) {
+  //       return context.filteredItems?.map((item) => (
+  //         <Card key={item.id} data={item} />
+  //       ))
+  //     }
+  //   } else {
+  //     return context.items?.map((item) => <Card key={item.id} data={item} />)
+  //   }
+  // }
+  const renderView = () => {
+    // Si hay un filtro aplicado y hay productos filtrados, muéstralos
+    if (context.searchByTitle && context.filteredItems?.length > 0) {
+      return context.filteredItems.map((item) => (
+        <Card key={item.id} data={item} />
+      ));
+    } 
+    // Si no hay filtro aplicado, muestra todos los productos
+    else if (context.items?.length > 0) {
+      return context.items.map((item) => <Card key={item.id} data={item} />);
+    } 
+    // Si no hay productos, muestra un mensaje
+    else {
+      return <p>No hay productos disponibles.</p>;
     }
-  }
+  };
 
   return (
     <Layout>
