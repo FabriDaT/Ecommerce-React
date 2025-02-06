@@ -8,26 +8,30 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if (context.setSearchByTitle?.lenght > 0) {
-      
-      if (context.filteredItems?.length > 0) {
-        return context.filteredItems?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))
-      }
-    } else {
-      return context.items?.map((item) => <Card key={item.id} data={item} />)
+    const itemsToRender =
+      context.searchByTitle?.length > 0 ? context.filteredItems : context.items;
+
+    if (!itemsToRender || itemsToRender.length === 0) {
+      return <p className="text-gray-500">No results found.</p>;
     }
-  }
+
+    return itemsToRender.map((item) => <Card key={item.id} data={item} />);
+  };
 
   return (
     <Layout>
       <div className="flex items-center justify-center relative w-80 mb-4">
         <h1 className="font-medium text-2xl">Exclusive Products</h1>
       </div>
-      <div className="flex items-center justify-center relative mb-4 w-160">
+      <div className="relative w-full max-w-md mb-8">
+        <input
+          type="text"
+          placeholder="Search a product.."
+          className="w-full p-2 pl-4 pr-10 border border-gray-300 rounded-lg outline-none"
+          onChange={(event) => context.setSearchByTitle(event.target.value)}
+        />
         <svg
-          className="size-6 m-1"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -40,13 +44,6 @@ function Home() {
             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
           />
         </svg>
-
-        <input
-          type="text"
-          placeholder="Search a product.."
-          className="rounded-lg border border-black w-80 p-4 mb-4"
-          onChange={(event) => context.setSearchByTitle(event.target.value)}
-        />
       </div>
 
       <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
