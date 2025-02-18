@@ -46,9 +46,12 @@ function Home() {
         </svg>
       </div>
 
-      <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+      <div className="flex items-center justify-center">
+         <section className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-screen-lg mx-auto">
         {renderView()}
       </section>
+      </div>
+     
       <ProductDetail />
     </Layout>
   );

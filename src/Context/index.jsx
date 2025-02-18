@@ -35,7 +35,7 @@ export const ShoppingCartProvider = ({ children }) => {
    
 
 
-   const apiUrl = "https://api.escuelajs.co/api/v1/products"
+   const apiUrl = "https://fakestoreapi.com/products"
    useEffect(() => {
     fetch(apiUrl)
       .then((responde) => responde.json())
