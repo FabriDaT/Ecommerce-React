@@ -14,7 +14,7 @@ const ProductDetail = () => {
       <div className="flex items-center justify-between p-6">
         <h2 className="font-medium text-xl"> Detail </h2>
         <button
-          className=" rounded-full hover:bg-red-400"
+          className=" rounded-full hover:bg-red-100 hover:shadow-md"
           onClick={context.closeProductDetail}
         >
           <svg
@@ -23,7 +23,7 @@ const ProductDetail = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-7"
           >
             <path
               strokeLinecap="round"

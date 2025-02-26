@@ -26,7 +26,7 @@ const Card = (data) => {
 
     if (isInCart) {
       return (
-        <button className="absolute top-0 right-0 flex justify-center items-center bg-green-500/85 text-black w-6 h-6 m-2 p-1 rounded-full ">
+        <button className="absolute top-0 right-0 flex justify-center items-center bg-green-500/85  text-black w-6 h-6 m-2 p-1 rounded-full ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -46,7 +46,7 @@ const Card = (data) => {
     } else {
       return (
         <button
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 hover:bg-green-500 rounded-full font-bold"
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 m-2 p-1 hover:bg-green-400/85 rounded-full font-bold"
           onClick={(event) => addProductToCart(event, data.data)}
         >
           <svg
