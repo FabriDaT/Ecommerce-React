@@ -3,7 +3,6 @@ import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
-import Footer from "../../Components/Footer";
 
 function Home() {
   const context = useContext(ShoppingCartContext);
@@ -54,7 +53,7 @@ function Home() {
       </div>
      
       <ProductDetail />
-      <Footer />
+
     </Layout>
   );
 }

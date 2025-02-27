@@ -10,6 +10,7 @@ import NotFound from "../NotFound";
 import SignIn from "../SignIn";
 import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
 import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer";
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -29,9 +30,14 @@ const App = () => {
   return (
     <ShoppingCartProvider>
       <BrowserRouter>
-        <AppRoutes />
-        <Navbar />
-        <CheckoutSideMenu />
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-1">
+            <AppRoutes />
+          </main>
+          <CheckoutSideMenu />
+          <Footer />
+        </div>
       </BrowserRouter>
     </ShoppingCartProvider>
   );
