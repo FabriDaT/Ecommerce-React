@@ -3,19 +3,32 @@ import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
+import { useParams } from "react-router-dom";
 
 function Home() {
   const context = useContext(ShoppingCartContext);
+  const {category} = useParams()
 
   const renderView = () => {
-    const itemsToRender =
-      context.searchByTitle?.length > 0 ? context.filteredItems : context.items;
+    // Primero filtramos por categoría
+    let filteredItems = category && category !== 'all'
+      ? context.items.filter(item => 
+          item.category?.toLowerCase() === category.toLowerCase()
+        )
+      : context.items;
 
-    if (!itemsToRender || itemsToRender.length === 0) {
+    // Luego aplicamos el filtro de búsqueda
+    if (context.searchByTitle?.length > 0) {
+      filteredItems = filteredItems.filter(item => 
+        item.title.toLowerCase().includes(context.searchByTitle.toLowerCase())
+      );
+    }
+
+    if (!filteredItems?.length) {
       return <p className="text-gray-500">No results found.</p>;
     }
 
-    return itemsToRender.map((item) => <Card key={item.id} data={item} />);
+    return filteredItems.map((item) => <Card key={item.id} data={item} />);
   };
 
   return (

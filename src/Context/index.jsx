@@ -32,34 +32,58 @@ export const ShoppingCartProvider = ({ children }) => {
    const [filteredItems, setFilteredItems] = useState(null);
    // Get Products by Title
    const [searchByTitle, setSearchByTitle] = useState(null);
+    // Get Products by Category
+   const [category, setCategory] = useState(null);
    
 
 
    const apiUrl = "https://fakestoreapi.com/products"
-   useEffect(() => {
-    fetch(apiUrl)
-      .then((responde) => responde.json())
-      .then((data) => setItems(data))
-      .catch((error) =>
-        console.error(`Ups! Ocurrio el siguiente error: ${error}`)
-      );
-  }, []);
+  
+  useEffect(() => {
+    // Función para obtener productos por categoría
+    const fetchProducts = async () => {
+      try {
+        const url = category 
+          ? `${apiUrl}/category/${encodeURIComponent(category)}`
+          : apiUrl;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
 
-  const filteredItemsByTitle = (items, searchByTitle) =>{
-    return items?.filter( item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
-  }
+    fetchProducts();
+  }, [category]); // Se ejecuta cuando cambia la categoría
 
-  useEffect (() =>  {
-    if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
-  }, [items, searchByTitle])
+
+  const filteredItemsByTitle = (items, searchText) => {
+    return items?.filter(item => 
+      item.title.toLowerCase().includes(searchText?.toLowerCase() || "") &&
+      (!category || item.category === category) // Filtro combinado
+    );
+  };
+
+
 console.log('filtered :' , filteredItems)
+
+useEffect(() => {
+  if (items) {
+    const filtered = filteredItemsByTitle(items, searchByTitle);
+    setFilteredItems(filtered);
+  }
+}, [searchByTitle, items, category]);
 
   return (
     <ShoppingCartContext.Provider  
       value={{
         count, setCount, openProductDetail, closeProductDetail, isProductDetailOpen, productToShow, setProductToShow,
         cartProducts, setCartProducts,isCheckoutSideMenuOpen, openCheckoutSideMenu, closeCheckoutSideMenu,
-        order, setOrder, items, setItems , searchByTitle ,setSearchByTitle, filteredItems, setFilteredItems
+        order, setOrder, items, setItems , searchByTitle ,setSearchByTitle, filteredItems, setFilteredItems,
+        category, setCategory,
+        categories: ["electronics", "jewelery", "men's clothing", "women's clothing"]
       }}
     >
       {children}
