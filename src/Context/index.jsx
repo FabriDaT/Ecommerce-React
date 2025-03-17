@@ -67,8 +67,6 @@ export const ShoppingCartProvider = ({ children }) => {
   };
 
 
-console.log('filtered :' , filteredItems)
-
 useEffect(() => {
   if (items) {
     const filtered = filteredItemsByTitle(items, searchByTitle);
