@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className='w-full h-full flex flex-col sm:flex-row items-center justify-between px-4 bg-teal-500 text-black mt-8'>
         <span className='font-semibold text-xl flex items-center justify-center gap-4 py-2'>
 
-            ShopiX All Rights Reserved <TbShoppingCartHeart />
+         SX <TbShoppingCartHeart />
             
             </span>
         <ul className='flex items-center justify-between gap-8 text-3xl py-4'>
